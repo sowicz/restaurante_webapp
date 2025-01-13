@@ -1,17 +1,18 @@
 import Booking from "../BookingTable/Booking";
 import { useState } from "react";
 
+
 export default function Book() {
   const [showTables, setShowTables] = useState<boolean>(false);
   const [selectedTableId, setSelectedTableId] = useState<number | null>(null);
 
-  const [availableTables, setAvailableTables] = useState([
+  const tables = [
     { id: 1, seats: 2, status: "available" },
     { id: 2, seats: 4, status: "available" },
     { id: 3, seats: 6, status: "reserved" },
     { id: 4, seats: 4, status: "available" },
     { id: 5, seats: 2, status: "reserved" },
-  ]);
+  ];
 
   const checkTable = (state: boolean) => {
     if (state) {
@@ -54,7 +55,7 @@ export default function Book() {
           {showTables && (
             <div id="tables" className="w-full md:w-1/2 px-16">
               <ul className="space-y-4">
-                {availableTables.map((table) => (
+                {tables.map((table) => (
                   <li
                     key={table.id}
                     className={`p-4 rounded-lg shadow-md cursor-pointer ${
