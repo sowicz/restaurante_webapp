@@ -1,10 +1,12 @@
 import Booking from "../BookingTable/Booking";
+import { Toast } from "../BookingTable/Toast";
 import { useState } from "react";
 
 
 export default function Book() {
   const [showTables, setShowTables] = useState<boolean>(false);
   const [selectedTableId, setSelectedTableId] = useState<number | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const tables = [
     { id: 1, seats: 2, status: "available" },
@@ -35,8 +37,11 @@ export default function Book() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log("Form submitted");
+    if (selectedTableId) {
+      setToastMessage(`Reservation for Table ${selectedTableId} sent!`);
+    } else {
+      setToastMessage("Please select a table before submitting.");
+    }
   };
 
   return (
@@ -137,6 +142,8 @@ export default function Book() {
           </div>
         }
       </div>
+      {/* Toast */}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
     </section>
   );
 }
