@@ -3,12 +3,22 @@ import { Toast } from "../BookingTable/Toast";
 import { useState } from "react";
 
 
+type tableStruct = {
+  id: number, 
+  seats: number, 
+  status: string
+};
+
+
+
 export default function Book() {
   const [showTables, setShowTables] = useState<boolean>(false);
   const [selectedTableId, setSelectedTableId] = useState<number | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const tables = [
+
+
+  const tables: tableStruct[] = [
     { id: 1, seats: 2, status: "available" },
     { id: 2, seats: 4, status: "available" },
     { id: 3, seats: 6, status: "reserved" },
